@@ -12,8 +12,6 @@ bash:
 bash-root:
 	docker exec -it -u root ${PROJECT_NAME}_app bash
 migrate:
-	docker exec --user ${USER_PHP} ${PROJECT_NAME}_app php console/command migrate
-seed:
-	docker exec --user ${USER_PHP} ${PROJECT_NAME}_app php console/command
+	docker exec -it --user ${USER_PHP} ${PROJECT_NAME}_app bin/console doctrine:migrations:migrate
 install:
 	docker exec --user ${USER_PHP} ${PROJECT_NAME}_app composer install
