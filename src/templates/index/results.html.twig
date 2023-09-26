@@ -20,6 +20,7 @@
                         <th scope="col">Data</th>
                     </tr>
                 </thead>
+                {% if exams %}
                 <tbody>
                     {% for exam in exams %}
                         <tr>
@@ -30,6 +31,7 @@
                         </tr>                        
                     {% endfor %}
                 </tbody>
+                {% endif %}
             </table>
         </div>
     </div>

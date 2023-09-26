@@ -18,7 +18,7 @@ class Answer
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Question::class, inverseBy=answer, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Question::class, inversedBy="answers", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $question;

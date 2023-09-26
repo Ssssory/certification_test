@@ -52,7 +52,7 @@ class Question
     }
 
     /**
-     * @return Collection<int, Answer>
+     * @return Collection|Answer[]
      */
     public function getAnswers(): Collection
     {

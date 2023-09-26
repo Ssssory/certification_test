@@ -18,24 +18,28 @@ final class QuestionService implements QuestionServiceInterface
     )
     {}
 
-    public function getQuestinById(int $id) : Question {
+    public function getQuestinById(int $id) : Question 
+    {
         return $this->questionRepository->find($id);
     }
 
-    public function getQuestion(Exam $exam=null) : ?Question {
+    public function getQuestion(Exam $exam=null) : ?Question 
+    {
         if (!$exam) {
             return $this->getRandomQuestion();
         }
         return $this->getNewQuestion($exam);
     }
 
-    private function getRandomQuestion() : Question {
+    private function getRandomQuestion() : Question 
+    {
         $allQuestions = $this->questionRepository->findAll();
         shuffle($allQuestions);
         return array_pop($allQuestions);
     }
 
-    private function getNewQuestion(Exam $exam) : ?Question {
+    private function getNewQuestion(Exam $exam) : ?Question 
+    {
         $last = $this->historyRepository->getLastAnswer($exam);
         if($last && $last->getStep() >= self::MAX_QUESTIONS) {
             return null;

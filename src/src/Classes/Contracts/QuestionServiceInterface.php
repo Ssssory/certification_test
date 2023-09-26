@@ -2,9 +2,11 @@
 
 namespace App\Classes\Contracts;
 
+use App\Entity\Question;
+
 interface QuestionServiceInterface
 {
-    function getQuestion();
-    function getQuestinById(int $id);
+    function getQuestion(): ?Question;
+    function getQuestinById(int $id): Question;
     
 }

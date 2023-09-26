@@ -30,6 +30,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/start", name="start")
      *
+     * @param Request $request
      * @return Response
      */
     public function startTest(Request $request) : Response 
@@ -52,6 +53,8 @@ class IndexController extends AbstractController
     /**
      * @Route("/exam/{id}", name="question")
      *
+     * @param Request $request
+     * @param string $id
      * @return Response
      */
     public function question(Request $request, string $id) : Response 
@@ -93,6 +96,8 @@ class IndexController extends AbstractController
     /**
      * @Route("/results/{exam}", name="result", defaults={"exam"=null})
      *
+     * @param Request $request
+     * @param ?int $exam
      * @return Response
      */
     public function result(Request $request, ?int $exam) : Response 
