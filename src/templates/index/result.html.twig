@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Result{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Result test</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h2>{{exam.name}}</h2>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Question</th>
+                        <th scope="col">Answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set step = 0 %}
+                    {% for one in exam.history %}
+                        
+                        <tr>
+                            <th scope="row">{% if step != one.step %}{{one.step}}{% endif %}</th>
+                            <td>{% if step != one.step %}{{one.question.text}}{% endif %}</td>
+                            <td>
+
+                                <span class="text-{% if one.answer.correct %}success{% else %}danger{% endif %}">
+                                    {{one.answer.variant}}
+                                </span>
+                            
+                            </td>
+                        </tr>
+                        {% set step = one.step %}
+                        
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}

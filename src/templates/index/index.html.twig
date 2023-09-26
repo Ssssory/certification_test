@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Example test</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <form action="{{path('start')}}" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name">
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="submit" value="start test">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
