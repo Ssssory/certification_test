@@ -91,12 +91,18 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/results/{exam}", name="result")
+     * @Route("/results/{exam}", name="result", defaults={"exam"=null})
      *
      * @return Response
      */
-    public function result(Request $request, ?int $exam=null) : Response 
+    public function result(Request $request, ?int $exam) : Response 
     {
+        if (!$exam) {
+            $exams = $this->examService->getAllCompleteExams();
+            return $this->render('index/results.html.twig', [
+                'exams' => $exams
+            ]);
+        }
         $exam = $this->getDoctrine()->getRepository(Exam::class)->find($exam);
         return $this->render('index/result.html.twig', [
             'exam' => $exam

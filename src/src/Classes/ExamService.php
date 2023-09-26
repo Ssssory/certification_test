@@ -11,6 +11,8 @@ use App\Repository\HistoryRepository;
 
 final class ExamService implements ExamServiceInterface
 {
+    const COUNT_LAST_EXAM = 10;
+
     function __construct(
         private ExamRepository $examRepository,
         private HistoryRepository $historyRepository,
@@ -55,5 +57,10 @@ final class ExamService implements ExamServiceInterface
             $history->setStep($step);
             $this->historyRepository->add($history);
         }
+    }
+
+    public function getAllCompleteExams() : array
+    {
+        return $this->examRepository->findBy(['complete' => true],['id' => 'desc'], self::COUNT_LAST_EXAM);
     }
 }

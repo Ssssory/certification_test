@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Results{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Last results</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col"></th>
+                        <th scope="col">Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for exam in exams %}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>{{exam.name}}</td>
+                            <td><a href="{{path('result',{'exam':exam.id})}}">link</a></td>
+                            <td>{{exam.dateStart.format('Y.m.d H:i')}}</td>
+                        </tr>                        
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}
