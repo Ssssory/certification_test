@@ -11,16 +11,23 @@ Update .env if need.
 
 - Create .env for framework from example by equals command:
 ``` cp src/.env.example src/.env ```
+- update DATABASE_URL with your data.
 - start project
 ```make up```
 - Install packajes
 ```make install```
 - Start migrations
 ```make migrate```
-- Fill db by seeds
-```make seed```
+
+### Commands
 
 Execute command in container:
 ``` make bash ```
 or by root:
 ``` make bash-root ```
+
+
+### App
+/ - main page
+/results - all results
+For start new test, go to main page and enter you name.
