@@ -2,6 +2,7 @@
 
 ### First start
 - Copy .env by command
+
 ``` cp .env.example .env ```
 
 Update .env if need.
@@ -10,24 +11,31 @@ Update .env if need.
 ``` echo $UID```
 
 - Create .env for framework from example by equals command:
+
 ``` cp src/.env.example src/.env ```
 - update DATABASE_URL with your data.
 - start project
+
 ```make up```
 - Install packajes
+
 ```make install```
+
 - Start migrations
+
 ```make migrate```
 
 ### Commands
 
 Execute command in container:
 ``` make bash ```
+
 or by root:
 ``` make bash-root ```
 
 
 ### App
-/ - main page
-/results - all results
+- url localhost:(you port)
+- / - main page
+- /results - all results
 For start new test, go to main page and enter you name.
