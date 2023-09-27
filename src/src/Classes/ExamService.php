@@ -46,6 +46,9 @@ final class ExamService implements ExamServiceInterface
 
     public function addAnswers(AnswerDto $dto): void
     {
+        if ($this->historyRepository->findOneBy(['exam' => $dto->getExam(), 'question' => $dto->getQuestion()])) {
+            return;
+        }
         $historyLast = $this->historyRepository->getLastAnswer($dto->getExam());
         $step = $historyLast ? $historyLast->getStep() + 1 : 1;
         $question = $this->questionService->getQuestinById($dto->getQuestion());
