@@ -3,6 +3,7 @@
 namespace App\Classes;
 
 use App\Classes\Contracts\ExamServiceInterface;
+use App\Classes\Dto\AnswerDto;
 use App\Entity\Exam;
 use App\Entity\History;
 use App\Repository\AnswerRepository;
@@ -43,15 +44,14 @@ final class ExamService implements ExamServiceInterface
         $this->examRepository->add($exam);
     }
 
-    public function addAnswers(Exam $exam, array $variants, int $questionId): void
+    public function addAnswers(AnswerDto $dto): void
     {
-        $historyLast = $this->historyRepository->getLastAnswer($exam);
+        $historyLast = $this->historyRepository->getLastAnswer($dto->getExam());
         $step = $historyLast ? $historyLast->getStep() + 1 : 1;
-        $question = $this->questionService->getQuestinById($questionId);
-
-        foreach ($variants as $key => $variant) {
+        $question = $this->questionService->getQuestinById($dto->getQuestion());
+        foreach ($dto->getVariants() as $key => $variant) {
             $history = new History();
-            $history->setExam($exam);
+            $history->setExam($dto->getExam());
             $history->setQuestion($question);
             $history->setAnswer($this->answerRepository->find($key));
             $history->setStep($step);

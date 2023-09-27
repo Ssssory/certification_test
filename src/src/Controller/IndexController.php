@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classes\Contracts\ExamServiceInterface;
+use App\Classes\Dto\AnswerDto;
 use App\Classes\QuestionService;
 use App\Entity\Exam;
 use Exception;
@@ -43,7 +44,7 @@ class IndexController extends AbstractController
         $exam = $this->examService->startExam($name);
 
         $question = $this->questionService->getQuestion();
-        
+
         return $this->render('index/question.html.twig', [
             'id' => $exam->getId(),
             'question' => $question
@@ -77,9 +78,10 @@ class IndexController extends AbstractController
                     'question' => $this->questionService->getQuestinById($question)
                 ]);
             }
-            $this->examService->addAnswers($exam, $variants, $question);
+            $dto = new AnswerDto($exam, $question, $variants);
+            $this->examService->addAnswers($dto);
         }
-        
+
         $question = $this->questionService->getQuestion($exam);
         if (!$question) {
             $this->examService->finishExam($exam);
