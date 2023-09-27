@@ -10,7 +10,7 @@ use App\Repository\QuestionRepository;
 
 final class QuestionService implements QuestionServiceInterface
 {
-    const MAX_QUESTIONS = 3;
+    const MAX_QUESTIONS = 10;
 
     function __construct(
         private QuestionRepository $questionRepository,
