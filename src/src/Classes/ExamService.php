@@ -63,4 +63,24 @@ final class ExamService implements ExamServiceInterface
     {
         return $this->examRepository->findBy(['complete' => true],['id' => 'desc'], self::COUNT_LAST_EXAM);
     }
+
+    public function prepareResult(int $examId): array
+    {
+        $exam = $this->examRepository->find($examId);
+        $answers = $this->historyRepository->getGroupHistoryByExam($exam);
+
+        $result = [];
+        foreach ($answers as $answer) {
+            if (!isset($result[$answer->getStep()])) {
+                $result[$answer->getStep()] = [
+                    'question' => $answer->getQuestion()->getText(),
+                    'answer' => $answer->getRight(),
+                ];
+            }
+            if ($result[$answer->getStep()]['answer'] === true && $answer->getRight() === false) {
+                $result[$answer->getStep()]['answer'] = false;
+            }
+        }
+        return $result;
+    }
 }

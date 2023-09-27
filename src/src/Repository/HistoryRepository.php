@@ -68,4 +68,18 @@ class HistoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getGroupHistoryByExam(Exam $exam) : array
+    {
+        return $this->createQueryBuilder('h')
+            ->join('h.question', 'q')
+            ->join('h.answer', 'a')
+            ->addSelect('q')
+            ->addSelect('a')
+            ->andWhere('h.exam = :exam')
+            ->setParameter('exam', $exam)
+            ->orderBy('h.step', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

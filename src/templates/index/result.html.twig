@@ -12,34 +12,51 @@
     <div class="row">
         <div class="col-12">
             <h2>{{exam.name}}</h2>
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Question</th>
-                        <th scope="col">Answer</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% set step = 0 %}
-                    {% for one in exam.history %}
-                        
-                        <tr>
-                            <th scope="row">{% if step != one.step %}{{one.step}}{% endif %}</th>
-                            <td>{% if step != one.step %}{{one.question.text}}{% endif %}</td>
-                            <td>
-
-                                <span class="text-{% if one.answer.correct %}success{% else %}danger{% endif %}">
-                                    {{one.answer.variant}}
-                                </span>
-                            
-                            </td>
-                        </tr>
-                        {% set step = one.step %}
-                        
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-6">
+                    <h3>Right answers</h3>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Question</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for step, one in result %}
+                                {% if one.answer%}
+                                    <tr>
+                                        <th scope="row">{{step}}</th>
+                                        <td>{{one.question}}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <h3>Wrong answers</h3>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Question</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for step, one in result %}
+                                {% if not one.answer%}
+                                    <tr>
+                                        <th scope="row">{{step}}</th>
+                                        <td>{{one.question}}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
         </div>
     </div>
 

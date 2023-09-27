@@ -85,8 +85,10 @@ class IndexController extends AbstractController
         $question = $this->questionService->getQuestion($exam);
         if (!$question) {
             $this->examService->finishExam($exam);
+            $result = $this->examService->prepareResult($id);
             return $this->render('index/result.html.twig', [
-                'exam' => $exam
+                'exam' => $exam,
+                'result' => $result
             ]);
         }
         return $this->render('index/question.html.twig', [
@@ -110,9 +112,10 @@ class IndexController extends AbstractController
                 'exams' => $exams
             ]);
         }
-        $exam = $this->getDoctrine()->getRepository(Exam::class)->find($exam);
+        $result = $this->examService->prepareResult($exam);
         return $this->render('index/result.html.twig', [
-            'exam' => $exam
+            'exam' => $this->examService->getExamById($exam),
+            'result' => $result
         ]);
     }
 }

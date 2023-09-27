@@ -92,4 +92,9 @@ class History
 
         return $this;
     }
+
+    public function getRight(): bool
+    {
+        return $this->answer->getCorrect();
+    }
 }
